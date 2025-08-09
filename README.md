@@ -1,50 +1,221 @@
-# Welcome to your Expo app 👋
+# 🛒 買い物リストアプリ
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+実用的でシンプルな買い物リスト管理アプリです。React Native + Expo で開発され、直感的な操作でストレスフリーな買い物体験を提供します。
 
-## Get started
+## 📱 主な機能
 
-1. Install dependencies
+### ✨ 核心機能
+- **商品追加**: 必要な商品を素早く追加
+- **購入管理**: チェックマークで購入状態を管理
+- **削除機能**: 不要になった商品を安全に削除
+- **データ永続化**: アプリを閉じてもデータが保持される
 
+### 🎨 UI/UX特徴
+- **美しいデザイン**: モダンでクリーンなインターフェース
+- **赤いチェックマーク**: 購入済み商品が一目で分かる
+- **スムーズアニメーション**: React Native Reanimated による滑らかな動作
+- **iPhone 16対応**: Dynamic Island に配慮した安全エリア対応
+
+### ♿ アクセシビリティ
+- **スクリーンリーダー対応**: 視覚障害者でも使用可能
+- **適切なタッチ領域**: 44px以上のタップエリア確保
+- **音声ガイド**: 操作内容を音声で案内
+
+## 🚀 使い方
+
+### 基本的な買い物フロー
+
+#### 1. 買い物前の準備
+1. **「追加」タブ**を開く
+2. 買いたい商品名を入力
+3. **「リストに追加」**ボタンをタップ
+4. 必要な商品をすべて追加する
+
+#### 2. 買い物中の使用
+1. **「リスト」タブ**を開いて買い物リストを確認
+2. 商品をカゴに入れたら**チェックボックスをタップ**
+3. **赤いチェックマーク ✓** が表示され、購入済み状態になる
+4. 商品名が薄くなって購入済みを視覚的に確認できる
+
+#### 3. 買い物完了後
+1. 家に帰ったら**削除ボタン（ゴミ箱アイコン）**をタップ
+2. 確認ダイアログで**「削除」**を選択
+3. 商品がリストから完全に削除される
+
+### 📋 詳細操作ガイド
+
+#### 商品追加画面（追加タブ）
+```
+┌─────────────────────────────┐
+│        何を買いますか？        │
+│    買い物リストに追加したい     │
+│      商品名を入力してください    │
+│                             │
+│  ┌───────────────────────┐   │
+│  │ 例：牛乳、パン、卵...     │   │
+│  └───────────────────────┘   │
+│                             │
+│    [ リストに追加 ]          │
+└─────────────────────────────┘
+```
+
+#### 商品リスト画面（リストタブ）
+```
+┌─────────────────────────────┐
+│        買い物リスト          │
+│        3件の商品            │
+│                             │
+│ ☐ 牛乳          2025/8/10  🗑│
+│ ☑ パン          2025/8/10  🗑│ ← 購入済み
+│ ☐ 卵            2025/8/10  🗑│
+└─────────────────────────────┘
+
+☐ = 未購入（チェックボックス空）
+☑ = 購入済み（赤いチェックマーク）
+🗑 = 削除ボタン
+```
+
+## 🔧 開発環境セットアップ
+
+### 前提条件
+- **Node.js** 18以上
+- **npm** または **yarn**
+- **Expo CLI**
+- **iOS Simulator** または **Android Emulator**（任意）
+
+### インストールと起動
+
+1. **依存関係のインストール**
    ```bash
    npm install
    ```
 
-2. Start the app
-
+2. **開発サーバーの起動**
    ```bash
+   npm start
+   # または
    npx expo start
    ```
 
-In the output, you'll find options to open the app in a
+3. **アプリの起動方法**
+   - **Expo Goアプリ**: QRコードをスキャンして起動
+   - **iOSシミュレーター**: `i` キーを押してiOS Simulatorで起動
+   - **Androidエミュレーター**: `a` キーを押してAndroidエミュレーターで起動
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
+### 🛠 開発スクリプト
 
 ```bash
-npm run reset-project
+# 開発サーバー起動
+npm start
+
+# ESLintでコード品質チェック
+npm run lint
+
+# TypeScript型チェック
+npm run type-check
+
+# iOS向けビルド
+npm run ios
+
+# Android向けビルド
+npm run android
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+## 📦 技術スタック
 
-## Learn more
+### フレームワーク・ライブラリ
+- **React Native** 0.75.3 - モバイルアプリフレームワーク
+- **Expo** 53.0.0 - 開発プラットフォーム
+- **TypeScript** - 型安全な開発
+- **Expo Router** - ファイルベースルーティング
 
-To learn more about developing your project with Expo, look at the following resources:
+### UI・アニメーション
+- **React Native Reanimated** - 高性能アニメーション
+- **React Navigation** - 画面遷移管理
+- **React Native Safe Area Context** - セーフエリア対応
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+### データ管理・永続化
+- **React Context** - グローバル状態管理
+- **AsyncStorage** - ローカルデータ永続化
+- **Expo Crypto** - UUID生成
 
-## Join the community
+### 開発・品質保証
+- **ESLint** - コード品質管理
+- **TypeScript Strict Mode** - 厳格な型チェック
 
-Join our community of developers creating universal apps.
+## 🗂 プロジェクト構成
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+```
+shoplist/
+├── app/                    # 画面コンポーネント（Expo Router）
+│   ├── (tabs)/            # タブ画面群
+│   │   ├── index.tsx      # 商品追加画面
+│   │   └── explore.tsx    # 商品リスト画面
+│   └── _layout.tsx        # アプリ全体レイアウト
+├── components/            # 再利用可能コンポーネント
+│   ├── ShoppingListItem.tsx  # 商品アイテムコンポーネント
+│   ├── ThemedText.tsx     # テーマ対応テキスト
+│   ├── ThemedView.tsx     # テーマ対応ビュー
+│   └── ui/                # UIコンポーネント
+├── contexts/              # React Context
+│   └── ShoppingContext.tsx   # 買い物リスト状態管理
+├── types/                 # TypeScript型定義
+│   └── index.ts          # ShoppingItem型など
+├── constants/             # 定数
+└── hooks/                 # カスタムフック
+```
+
+## 🎯 設計思想
+
+### シンプルさを重視
+- **直感的操作**: 説明不要で使える簡単さ
+- **必要最小限の機能**: 買い物に特化した機能のみ
+- **高速動作**: ストレスのない操作レスポンス
+
+### 実用性の追求
+- **データ永続化**: アプリを閉じてもデータが残る
+- **エラーハンドリング**: 予期しない操作でもクラッシュしない
+- **確認ダイアログ**: 誤削除を防ぐ安全機能
+
+### モダンな開発手法
+- **TypeScript**: バグを事前に防ぐ型安全性
+- **コンポーネント指向**: 再利用可能な部品化
+- **アクセシビリティ**: すべてのユーザーが使える設計
+
+## 🔍 トラブルシューティング
+
+### よくある問題と解決法
+
+#### アプリが起動しない
+```bash
+# キャッシュクリア
+npx expo start --clear
+
+# node_modules再インストール
+rm -rf node_modules
+npm install
+```
+
+#### データが保存されない
+- AsyncStorageのアクセス権限を確認
+- 開発モード再起動を試す
+
+#### アニメーションが動かない
+- React Native Reanimatedのインストールを確認
+- iOS/Androidの再ビルドを実行
+
+## 📄 ライセンス
+
+このプロジェクトは学習・個人使用目的で開発されています。
+
+## 🤝 貢献方法
+
+バグ報告や機能提案は GitHub Issues でお願いします。
+
+## 📞 サポート
+
+技術的な質問や使用方法については、プロジェクトの GitHub リポジトリをご確認ください。
+
+---
+
+**🛒 楽しい買い物体験をお楽しみください！**
