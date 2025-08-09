@@ -13,14 +13,13 @@ import { ShoppingItem } from '@/types';
 
 export default function ListScreen() {
   const colorScheme = useColorScheme();
-  const { items, toggleItem } = useShoppingContext();
+  const { items, toggleItem, deleteItem } = useShoppingContext();
 
   const renderItem: ListRenderItem<ShoppingItem> = ({ item }) => (
     <ShoppingListItem 
       item={item}
       onToggleComplete={toggleItem}
-      // TODO: Issue #11で削除機能を実装
-      // onDelete={deleteItem}
+      onDelete={deleteItem}
     />
   );
 

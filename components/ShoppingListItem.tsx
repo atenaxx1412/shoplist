@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import { StyleSheet, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, TouchableOpacity, View, Alert } from 'react-native';
 import Animated, { 
   useAnimatedStyle, 
   withSpring, 
@@ -22,9 +22,7 @@ import { ShoppingItem } from '@/types';
 
 interface ShoppingListItemProps {
   item: ShoppingItem;
-  // TODO: Issue #10で実装予定
   onToggleComplete?: (id: string) => void;
-  // TODO: Issue #11で実装予定  
   onDelete?: (id: string) => void;
 }
 
@@ -36,6 +34,26 @@ export function ShoppingListItem({
   const colorScheme = useColorScheme();
   const colors = Colors[colorScheme ?? 'light'];
   
+  const handleDelete = () => {
+    if (!onDelete) return;
+
+    Alert.alert(
+      '削除確認',
+      `「${item.name}」を削除しますか？`,
+      [
+        {
+          text: 'キャンセル',
+          style: 'cancel',
+        },
+        {
+          text: '削除',
+          style: 'destructive',
+          onPress: () => onDelete(item.id),
+        },
+      ]
+    );
+  };
+
   // デバッグ用
   console.log(`Item ${item.name} - isCompleted: ${item.isCompleted}`);
 
@@ -111,11 +129,10 @@ export function ShoppingListItem({
         </ThemedText>
       </Animated.View>
 
-      {/* 削除ボタン領域 - Issue #11で機能実装予定 */}
+      {/* 削除ボタン領域 */}
       <TouchableOpacity
         style={styles.deleteButton}
-        onPress={() => onDelete?.(item.id)}
-        disabled={!onDelete} // Issue #11まで無効化
+        onPress={handleDelete}
         activeOpacity={0.6}
       >
         <IconSymbol
