@@ -6,14 +6,7 @@ import * as Crypto from 'expo-crypto';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 import { Colors } from '@/constants/Colors';
-
-// Issue #7で定義された型 (本来は別ファイルからimport)
-interface ShoppingItem {
-  id: string;
-  name: string;
-  isCompleted: boolean;
-  createdAt: Date;
-}
+import { ShoppingItem } from '@/types';
 
 export default function AddScreen() {
   const [itemName, setItemName] = useState('');
