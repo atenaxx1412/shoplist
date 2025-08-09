@@ -10,10 +10,11 @@ import { StyleSheet, TouchableOpacity, Alert } from 'react-native';
 import Animated, { 
   useAnimatedStyle, 
   withSpring, 
-  withTiming 
+  withTiming, 
+  FadeIn,
+  FadeOut
 } from 'react-native-reanimated';
 import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
 import { IconSymbol } from '@/components/ui/IconSymbol';
 import { ShoppingItem } from '@/types';
 
@@ -74,15 +75,22 @@ export function ShoppingListItem({
   });
 
   return (
-    <ThemedView style={[
-      styles.container, 
-      item.isCompleted && styles.completedContainer
+    <Animated.View 
+      entering={FadeIn.duration(300)}
+      exiting={FadeOut.duration(200)}
+      style={[
+        styles.container, 
+        item.isCompleted && styles.completedContainer
     ]}>
       {/* 美しいチェックボックス領域 */}
       <TouchableOpacity 
         style={styles.checkboxTouchArea}
         onPress={() => onToggleComplete?.(item.id)}
         activeOpacity={0.7}
+        accessibilityRole="checkbox"
+        accessibilityState={{ checked: item.isCompleted }}
+        accessibilityLabel={`${item.name}を${item.isCompleted ? '未購入に' : '購入済みに'}変更`}
+        accessibilityHint="ダブルタップして購入状態を切り替えます"
       >
         <Animated.View style={[styles.checkbox, checkboxAnimatedStyle]}>
           <ThemedText style={[
@@ -119,6 +127,9 @@ export function ShoppingListItem({
         style={styles.deleteButton}
         onPress={handleDelete}
         activeOpacity={0.6}
+        accessibilityRole="button"
+        accessibilityLabel={`${item.name}を削除`}
+        accessibilityHint="ダブルタップして商品を削除します"
       >
         <IconSymbol
           name="trash"
@@ -126,7 +137,7 @@ export function ShoppingListItem({
           color={item.isCompleted ? '#94A3B8' : '#64748B'}
         />
       </TouchableOpacity>
-    </ThemedView>
+    </Animated.View>
   );
 }
 
