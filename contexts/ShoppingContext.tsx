@@ -31,9 +31,14 @@ export function ShoppingProvider({ children }: ShoppingProviderProps) {
 
   const toggleItem = (id: string) => {
     setItems(prevItems =>
-      prevItems.map(item =>
-        item.id === id ? { ...item, isCompleted: !item.isCompleted } : item
-      )
+      prevItems.map(item => {
+        if (item.id === id) {
+          const updatedItem = { ...item, isCompleted: !item.isCompleted };
+          console.log(`Toggling item ${item.name}: ${item.isCompleted} -> ${updatedItem.isCompleted}`);
+          return updatedItem;
+        }
+        return item;
+      })
     );
     // TODO: Issue #12でAsyncStorageに保存
   };
