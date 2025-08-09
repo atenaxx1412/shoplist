@@ -20,6 +20,9 @@ const MAPPING = {
   'chevron.right': 'chevron-right',
   'plus.circle': 'add-circle',
   'list.bullet': 'list',
+  'checkmark.square.fill': 'check-box',
+  'square': 'check-box-outline-blank',
+  'trash': 'delete',
 } as IconMapping;
 
 /**
