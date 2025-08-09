@@ -6,18 +6,15 @@
  */
 
 import React from 'react';
-import { StyleSheet, TouchableOpacity, View, Alert } from 'react-native';
+import { StyleSheet, TouchableOpacity, Alert } from 'react-native';
 import Animated, { 
   useAnimatedStyle, 
   withSpring, 
-  withTiming, 
-  interpolate 
+  withTiming 
 } from 'react-native-reanimated';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 import { IconSymbol } from '@/components/ui/IconSymbol';
-import { Colors } from '@/constants/Colors';
-import { useColorScheme } from '@/hooks/useColorScheme';
 import { ShoppingItem } from '@/types';
 
 interface ShoppingListItemProps {
@@ -31,8 +28,6 @@ export function ShoppingListItem({
   onToggleComplete, 
   onDelete 
 }: ShoppingListItemProps) {
-  const colorScheme = useColorScheme();
-  const colors = Colors[colorScheme ?? 'light'];
   
   const handleDelete = () => {
     if (!onDelete) return;
@@ -68,16 +63,6 @@ export function ShoppingListItem({
     };
   });
 
-  // チェックマークのアニメーション（シンプルに）
-  const checkmarkAnimatedStyle = useAnimatedStyle(() => {
-    const scale = item.isCompleted
-      ? withSpring(1.2, { damping: 10 })
-      : withSpring(0, { damping: 10 });
-
-    return {
-      transform: [{ scale }],
-    };
-  });
 
   // テキストのアニメーション
   const textAnimatedStyle = useAnimatedStyle(() => {

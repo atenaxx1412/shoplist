@@ -13,7 +13,7 @@ import { ShoppingItem } from '@/types';
 
 export default function ListScreen() {
   const colorScheme = useColorScheme();
-  const { items, toggleItem, deleteItem } = useShoppingContext();
+  const { items, isLoading, toggleItem, deleteItem } = useShoppingContext();
 
   const renderItem: ListRenderItem<ShoppingItem> = ({ item }) => (
     <ShoppingListItem 
@@ -21,6 +21,12 @@ export default function ListScreen() {
       onToggleComplete={toggleItem}
       onDelete={deleteItem}
     />
+  );
+
+  const LoadingComponent = () => (
+    <ThemedView style={styles.emptyStateContainer}>
+      <ThemedText style={styles.loadingText}>データを読み込み中...</ThemedText>
+    </ThemedView>
   );
 
   const EmptyComponent = () => (
@@ -56,10 +62,10 @@ export default function ListScreen() {
             keyExtractor={(item) => item.id}
             contentContainerStyle={[
               styles.listContainer,
-              items.length === 0 && styles.emptyListContainer
+              (items.length === 0 || isLoading) && styles.emptyListContainer
             ]}
             showsVerticalScrollIndicator={false}
-            ListEmptyComponent={EmptyComponent}
+            ListEmptyComponent={isLoading ? LoadingComponent : EmptyComponent}
             // パフォーマンス最適化設定
             removeClippedSubviews={true}
             maxToRenderPerBatch={10}
@@ -130,5 +136,11 @@ const styles = StyleSheet.create({
     color: '#64748b',
     textAlign: 'center',
     lineHeight: 22,
+  },
+  loadingText: {
+    fontSize: 18,
+    fontWeight: '600',
+    color: '#64748b',
+    textAlign: 'center',
   },
 });
